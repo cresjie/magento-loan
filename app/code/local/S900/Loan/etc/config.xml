@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<!-- 
+	Name: Loan
+	Author: Cres Jie Labasano
+	Email: cresjie@gmail.com
+	Github: github.com/cresjie
+-->
+<config>
+	<modules>
+		<S900_Loan>
+			<version>1.0.6.4</version>
+		</S900_Loan>
+	</modules>
+
+
+	<global>
+
+		<helpers>
+			<loan>
+				<class>S900_Loan_Helper</class>
+			</loan>
+		</helpers>
+
+		<models>
+			<loan>
+				<class>S900_Loan_Model</class>
+				<resourceModel>loan_resource</resourceModel>
+			</loan>
+			<loan_resource>
+				<class>S900_Loan_Model_Resource</class>
+				<entities>
+					<loan>
+						<table>loan</table>
+					</loan>
+					<status_attr>
+						<table>loan_status_attr</table>
+					</status_attr>
+				</entities>
+			</loan_resource>
+		</models>
+
+		<blocks>
+			<loan>
+				<class>S900_Loan_Block</class>
+			</loan>
+		</blocks>
+
+		<resources>
+			<loan_setup>
+				<setup>
+					<module>S900_Loan</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</loan_setup>
+
+			<loan_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</loan_read>
+			<loan_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</loan_write>
+		</resources>
+	</global>
+
+
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<loan after="Mage_Adminhtml">S900_Loan_Adminhtml</loan>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<s900_loan>
+					<file>s900_loan.xml</file>
+				</s900_loan>
+			</updates>
+		</layout>
+
+	</adminhtml>
+
+</config>

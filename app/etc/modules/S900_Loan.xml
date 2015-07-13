@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<S900_Loan>
+			<active>true</active>
+			<codePool>local</codePool>
+		</S900_Loan>
+	</modules>
+
+</config>

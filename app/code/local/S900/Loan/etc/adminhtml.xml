@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<config>
+	<menu>
+		<loan translate="title" module="loan">
+			<title>Loan</title>
+			<sort_order>30</sort_order>
+
+			<children>
+				<manage_loan>
+					<title>Manage Loans</title>
+					<sort_order>1</sort_order>
+					<action>adminhtml/loan/manage</action>
+				</manage_loan>
+
+			</children>
+		</loan>
+	</menu>
+
+
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<loan translate="title" module="loan">
+						<title>Loan Menu</title>
+						<sort_order>1</sort_order>
+					</loan>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	
+</config>
