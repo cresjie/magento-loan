@@ -14,7 +14,7 @@ class S900_Loan_Model_Loan extends Mage_Core_Model_Abstract{
 		$now = Varien_Date::now();
 		
 		if( $this->_isObjectNew )
-			$this->setData('created_at', $now);
+			$this->setData('apply_at', $now);
 		else
 			$this->setData('updated_at', $now);
 		
@@ -30,19 +30,22 @@ class S900_Loan_Model_Loan extends Mage_Core_Model_Abstract{
 		$errors = array();
 		$helper = Mage::helper('loan');
 
-		if( !( Zend_Validate::is($this->getEmail(),'NotEmpty') && Zend_Validate::is($this->getEmail(),'EmailAddress') ) ){
-			$errors[] = 'Email should be a valid email address';
+		if( ! Zend_Validate::is($this->getAccountId(),'NotEmpty')  ){
+			$errors[] = 'Account id should be a valid numeric value';
+		}
+		if( ! Zend_Validate::is($this->getAmount(),'Float')  ){
+			$errors[] = 'Amount should be a valid numeric value';
 		}
 
-		if( ! Zend_Validate::is($this->getFirstName(),'NotEmpty')  ){
-			$errors[] = 'First Name is required';
+		if( ! Zend_Validate::is($this->getDuration(),'NotEmpty')  ){
+			$errors[] = 'Duration is required';
 		}
 
-		if( !Zend_Validate::is($this->getLastName(), 'NotEmpty')  ){
-			$errors[] = 'Last Name is required';
+		if( !Zend_Validate::is($this->getInterest(), 'Float')  ){
+			$errors[] = 'Interest should be a valid numeric value';
 		}
 
-		if( !( Zend_Validate::is($this->getLoanValue(), 'NotEmpty') && Zend_Validate::is($this->getLoanValue(),'Float') )  ){
+		if( ! Zend_Validate::is($this->getReasonCatId(), 'NotEmpty')   ){
 			$errors[] = 'Loan Value should be a valid number';
 		}
 

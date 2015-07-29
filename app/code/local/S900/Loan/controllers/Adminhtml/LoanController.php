@@ -11,20 +11,23 @@ class S900_Loan_Adminhtml_LoanController extends Mage_Adminhtml_Controller_Actio
 
 
 	public function indexAction(){
-		echo 'indexAction';
+		$this->_title( 'Loan Manage' );
+		$this->loadLayout();
+		$this->_setActiveMenu('loan/loan');
+		$this->renderLayout();
+		
 	}
+
 	public function manageAction(){
 		
 
-
+		
 		$this->_title( 'Loan Manage' );
 		$this->loadLayout();
 		$this->_setActiveMenu('loan/loan');
 		$this->_addContent( $this->getLayout()->createBlock('loan/adminhtml_loan_manage') );
 
 		$this->renderLayout();
-		
-		
 
 		//var_dump($this->getLayout()->createBlock('loan/adminhtml_loan_manage_grid'));
 		
@@ -47,7 +50,7 @@ class S900_Loan_Adminhtml_LoanController extends Mage_Adminhtml_Controller_Actio
 	public function editAction(){
 		
 		$this->_initLoan();
-		
+
 		$this->_title( 'Loan Edit' );
 
 		$this->loadLayout();
@@ -182,7 +185,5 @@ class S900_Loan_Adminhtml_LoanController extends Mage_Adminhtml_Controller_Actio
 		$this->_redirect( '*/loan/manage' );
 	}
 
-
-	
 
 }

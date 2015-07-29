@@ -1,0 +1,42 @@
+<div class="loan-apply-container">
+
+	<form class="loan-apply-form" id="loan_apply_form" method="post" action="<?=$this->getActionUrl()?>">
+		<fieldset>
+			<h4>Apply for loan</h4>
+
+			<div class="input-box">
+				<label for="email">Email:</label>
+				<input type="email" name="email"class="required input-text">
+			</div>
+
+			<div class="input-box">
+				<label for="first_name">First Name:</label>
+				<input type="text" name="first_name" class="required input-text">
+			</div>
+
+			<div class="input-box">
+				<label for="last_name">Last Name:</label>
+				<input type="text" name="last_name" class="required input-text">
+			</div>
+
+			<div class="input-box">
+				<label for="loan_value">Loan Value:</label>
+				<input type="text" name="loan_value" class="required">
+			</div>
+
+			 <div class="button-set">
+		        <p class="required">* Required Fields</p>
+		        <button class="form-button" type="submit"><span>Submit</span></button>
+		 
+		    </div>
+		</fieldset>
+	</form>
+
+	<div id="amount_slider">
+		<span class="ui-slider-handle"><span id="amount_container"></span></span>
+	</div>
+</div>
+<script>
+	var amountOptions = <?=$this->getAmountOptions()?>;
+	var durationOptions = <?=$this->getDurationOptions()?>;
+</script>

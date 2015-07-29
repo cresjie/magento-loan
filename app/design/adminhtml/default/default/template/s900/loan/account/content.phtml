@@ -1,0 +1,130 @@
+<div class="content-header">
+    <h3 class="icon-head head-user-edit"><?=ucwords($this->getAccount()->firstName)?> <?=ucwords($this->getAccount()->lastName)?></h3>
+    <p class="form-buttons">
+    	<button id="id_8849c892e72a7108f3985b0a56c788a8" title="Back" type="button" class="scalable back" onclick="setLocation('<?=$this->getBackUrl()?>')" style=""><span><span><span>Back</span></span></span></button>
+    	
+    	<button id="id_3244562c7de5d57f4e8b25a54cc88e61" title="Reset" type="button" class="scalable " onclick="setLocation(window.location.href)" style=""><span><span><span>Reset</span></span></span></button>
+
+    	<button id="id_51e5a3fff6f1b5b0da9e2a153f578df9" title="Create Order" type="button" class="scalable add" onclick="setLocation('http://svr/~cres/magento/index.php/admin/sales_order_create/start/customer_id/1/key/8e0eb7ffc0f917ab7fb506a3d5b6b29e/')" style=""><span><span><span>Create Order</span></span></span></button>
+    	
+    	<button id="id_34f197251935721efc58a6c33f6461c3" title="Delete Customer" type="button" class="scalable delete" onclick="deleteConfirm('Are you sure you want to do this? Account History will also be deleted.', '<?=$this->getUrl('*/*/delete',array('id' => $this->getAccount()->id))?>')" style=""><span><span><span>Delete Customer</span></span></span></button>
+
+    	<button id="id_362f7f2f26ae3c013982998198b122c8" title="Save Customer" type="button" class="scalable save" onclick="formSubmit()" style=""><span><span><span>Save Customer</span></span></span></button>
+
+    	<button id="id_b7e050f9ba2add8584f650beaab77e21" title="Save and Continue Edit" type="button" class="scalable save" onclick="saveAndContinueEdit('http://svr/~cres/magento/index.php/admin/customer/save/back/edit/tab/{{tab_id}}/id/1/key/6a3bbf066caa30b22826279d962c4d13/')" style=""><span><span><span>Save and Continue Edit</span></span></span></button>
+    </p>
+</div>
+
+<div class="entry-edit">
+	
+	<div id="tab_container">
+		<div id="loan_account_tab_view_content">
+			
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4>Account Information</h4>
+				</div>
+				<div class="box">
+					<form id="edit_form" method="post" action="<?=$this->getUrl('*/*/save',array('id' => $this->getAccount()->id))?>" enctype="multipart/form-data">
+						<input type="hidden" name="form_key" value="<?=Mage::getSingleton('core/session')->getFormKey()?>">
+						<table class="form-list">
+							<tbody>
+								<tr>
+									<td class="label"><label>Title</label></td>
+									<td class="value">
+										<?=$this->helper('loan/form')->select('title',
+																		$this->getAccount()->title,
+																		array('Mr' => 'Mr','Mrs' => 'Mrs'),
+																		array('class' => 'select'))?>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>First Name <span class="required">*</span></label></td>
+									<td class="value">
+										<input type="text" name="first_name" class="input-text required-entry" value="<?=$this->getAccount()->first_name?>">
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Middle Name</label></td>
+									<td class="value">
+										<input type="text" name="middle_name" class="input-text "  value="<?=$this->getAccount()->middle_name?>">
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Last Name <span class="required">*</span></label></td>
+									<td class="value">
+										<input type="text" name="last_name" class="input-text required-entry" value="<?=$this->getAccount()->last_name?>">
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Email <span class="required">*</span></label></td>
+									<td class="value">
+										<input type="text" name="email" class="input-text required-entry validate-email " value="<?=$this->getAccount()->email?>">
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Birthday <span class="required">*</span></label></td>
+									<td class="value">
+
+										<input type="text" id="birthday" name="birthday" class="input-text required-entry validate-date" value="<?=$this->getAccount()->birthday ? $this->getAccount()->birthday->format('m/d/Y') : null?>" placeholder="mm/dd/YYYY">
+										<img src="<?=$this->getSkinUrl('images/grid-cal.gif')?>" alt="" class="v-middle" id="birthday_trig" title="Select Date" style="">
+										<script>
+											 Calendar.setup({
+										                    inputField: "birthday",
+										                    ifFormat: "%m/%e/%Y",
+										                    showsTime: false,
+										                    button: "birthday_trig",
+										                    align: "Bl",
+										                    singleClick : true
+										                });
+										</script>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Mobile Phone <span class="required">*</span></label></td>
+									<td class="value">
+										<input type="text"  name="mobile_phone" class="input-text required-entry validate-digits" value="<?=$this->getAccount()->mobile_phone?>">
+									</td>
+								</tr>
+
+								<tr>
+									<td class="label"><label>Address <span class="required">*</span></label></td>
+									<td class="value">
+										<div class="value">
+											<input type="text" name="address" id="address" class="input-text required-entry" value='<?=$this->getAccount()->address?>'>
+										</div>
+										<input type="hidden" name="address_info" id="address_info" value='<?=$this->getAccount()->address_info?>'>
+										<div id="google_map" style="height: 380px;"></div>
+										<script src="<?=$this->getSkinUrl('js/s900/loan/account/edit.js')?>"></script>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</form>
+				</div> <!-- /.box-->
+			</div>
+		</div><!-- /#loan_account_tab_view_content-->
+
+		<div id="loans_tab_view_content">
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4>Account Loans</h4>
+				</div>
+				<div class="box">
+					<?=$this->getLayout()->createBlock('loan/Adminhtml_Loan_Manage_Grid')->setData('account_id', $this->getAccount()->id)->toHtml()?>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+

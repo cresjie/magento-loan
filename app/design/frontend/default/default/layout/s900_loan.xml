@@ -1,0 +1,21 @@
+<layout>
+	
+	<loan_apply_index>
+
+		<reference name="head">
+			<action method="addCss"><name>css/s900/loan/jquery-ui.min.css</name></action>
+			<action method="addCss"><name>css/s900/loan/apply.css</name></action>
+
+			<action method="addItem"><type>js</type><script>lib/jquery/jquery-1.10.2.min.js</script></action>
+			<action method="addItem"><type>js</type><script>lib/jquery/noconflict.js</script></action>
+			<action method="addItem"><type>js</type><script>lib/jquery/ui/jquery-ui.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/s900/loan/apply.js</script></action>
+		</reference>
+
+
+		<reference name="content">
+			<block type="loan/applyloan" name="loan.apply.content" template="s900/loan/apply-form.phtml"/>
+		</reference>
+	</loan_apply_index>
+
+</layout>

@@ -7,11 +7,27 @@
 			<sort_order>30</sort_order>
 
 			<children>
+				<index>
+					<title>Index</title>
+					<sort_order>1</sort_order>
+					<action>adminhtml/loan</action>
+				</index>
+
 				<manage_loan>
 					<title>Manage Loans</title>
 					<sort_order>1</sort_order>
 					<action>adminhtml/loan/manage</action>
 				</manage_loan>
+				<account>
+					<title>Accounts</title>
+					<sort_order>2</sort_order>
+					<action>adminhtml/loan_account</action>
+				</account>
+				<config>
+					<title>Configuration</title>
+					<sort_order>10</sort_order>
+					<action>adminhtml/loan_config</action>
+				</config>
 
 			</children>
 		</loan>

@@ -6,6 +6,7 @@
 	Github: github.com/cresjie
 -->
 <config>
+
 	<modules>
 		<S900_Loan>
 			<version>1.0.6.4</version>
@@ -30,11 +31,20 @@
 				<class>S900_Loan_Model_Resource</class>
 				<entities>
 					<loan>
-						<table>loan</table>
+						<table>loan_loan</table>
 					</loan>
 					<status_attr>
 						<table>loan_status_attr</table>
 					</status_attr>
+					<account>
+						<table>loan_account</table>
+					</account>
+					<income>
+						<table>loan_income</table>
+					</income>
+					<reason>
+						<table>loan_reason</table>
+					</reason>
 				</entities>
 			</loan_resource>
 		</models>
@@ -43,6 +53,11 @@
 			<loan>
 				<class>S900_Loan_Block</class>
 			</loan>
+			<adminhtml>
+				<rewrite>
+					<page_head>S900_Loan_Block_Html_Head</page_head>
+				</rewrite>
+			</adminhtml>
 		</blocks>
 
 		<resources>
@@ -73,6 +88,7 @@
 	<admin>
 		<routers>
 			<adminhtml>
+				<use>admin</use>
 				<args>
 					<modules>
 						<loan after="Mage_Adminhtml">S900_Loan_Adminhtml</loan>
@@ -81,6 +97,18 @@
 			</adminhtml>
 		</routers>
 	</admin>
+
+	<frontend>
+		<routers>
+			<loan>
+				<use>standard</use>
+				<args>
+					<module>S900_Loan</module>
+					<frontName>loan</frontName>
+				</args>
+			</loan>
+		</routers>
+	</frontend>
 
 	<adminhtml>
 		<layout>
@@ -92,5 +120,15 @@
 		</layout>
 
 	</adminhtml>
+
+	<frontend>
+		<layout>
+			<updates>
+				<s900_loan>
+					<file>s900_loan.xml</file>
+				</s900_loan>
+			</updates>
+		</layout>
+	</frontend>
 
 </config>

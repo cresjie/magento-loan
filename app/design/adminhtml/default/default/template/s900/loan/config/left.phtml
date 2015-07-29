@@ -1,0 +1,45 @@
+
+<div ng-controller="LoanReasonController">
+
+	<div class="content-header">
+		<h2>Loan Reason Category</h2>
+		
+	</div>
+		<button class="add" ng-click="addRootCat()"><span></span>Add Root Category</button>
+		<p></p>
+		<button class="add" ng-click="addSubCat()"><span></span>Add Sub Category</button>
+	<div class="reason-cat-list">
+	
+
+		<ul>
+			<li ng-repeat="root in categories  | where:{parent_id:0} track by $index">
+				<div class="cat-row" ng-click="selectRoot(root)" ng-dblclick="editCat(root)" ng-class="{selected: root == selectedRoot,editing: root == editedCat}">
+					<span class="elbow-spacer" ng-click="toogleSubCat($index)" ng-class="isSubCatHidden($index) ? 'elbow-plus' : 'elbow-minus' "></span>
+					<label><b>{{root.cat_name}}</b></label>
+					<form class="cat-edit-form" ng-submit="saveCat(editedCat,'submit')">
+						<input type="text" ng-blur="saveCat(root,'blur')" ng-focus-me="root == editedCat" ng-escape="cancelEdit(root)" ng-model="editedCat.cat_name">
+					</form>
+					<a href="#" class="pull-right" ng-click="deleteReasonCat(root,$event)">x</a>
+				</div>
+				<ul ng-if="!isSubCatHidden($index)">
+					<li ng-repeat="cat in categories | where: {parent_id:root.cat_id}  track by $index">
+						<div class="cat-row" ng-class="{editing: cat === editedCat}" ng-dblclick="editCat(cat)">
+							<span class="elbow-spacer elbow-elbow"></span>
+							<label>{{cat.cat_name}}</label>
+							<form class="cat-edit-form sub-cat-form" ng-submit="saveCat(editedCat,'submit')">
+								<input type="text" ng-blur="saveCat(cat,'blur')" ng-focus-me="cat == editedCat" ng-escape="cancelEdit(cat)" ng-model="cat.cat_name">
+							</form>
+							<a href="#" class="pull-right" ng-click="deleteReasonCat(cat,$event)">x</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+
+	</div>
+</div>
+
+
+
+

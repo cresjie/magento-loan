@@ -1,0 +1,39 @@
+.elbow-spacer{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+}
+.elbow-elbow{
+	background: url(../../../images/s900/loan/elbow.gif);
+}
+.elbow-plus{
+	background: url(../../../images/s900/loan/elbow-plus.gif);
+}
+.elbow-minus{
+	background: url(../../../images/s900/loan/elbow-end-minus.gif);
+}
+.pull-right{
+	float: right;
+}
+.hide{
+	display: none
+}
+.reason-cat-list{
+	padding: 10px;
+}
+.reason-cat-list li ul{
+	margin-left: 10px;
+}
+.reason-cat-list .cat-row:hover,.reason-cat-list .cat-row.selected{
+	background: #F2F2F2;
+	cursor: pointer;
+}
+.cat-edit-form{
+	display: none
+}
+.reason-cat-list .sub-cat-form input{max-width: 160px}
+.reason-cat-list .editing label{display: none}
+.reason-cat-list .editing .cat-edit-form{display: inline}
+#config_form td{
+	max-width: 100px;
+}

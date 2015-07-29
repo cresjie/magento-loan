@@ -10,34 +10,60 @@ class S900_Loan_Block_Adminhtml_Loan_Edit_Form extends Mage_Adminhtml_Block_Widg
 			'action' => $this->getUrl('*/*/save',array('loan_id' => $this->getRequest()->getParam('loan_id') )),
 			'method' => 'post',
 			'enctype'   => 'multipart/form-data'
-		));	
-
-		$form->addField('email','text',array(
-			'label' => Mage::helper('loan')->__('Email'),
-			'class' => 'required-entry',
-			'required' => true,
-			'name' => 'email'
 		));
 
-		$form->addField('first_name','text',array(
-			'label' => Mage::helper('loan')->__('First Name'),
+		$form->addField('account_id','text',array(
+			'label' => Mage::helper('loan')->__('Account Id'),
 			'class' => 'required-entry',
 			'required' => true,
-			'name' => 'first_name'
+			'name' => 'account_id'
 		));
 
-		$form->addField('last_name','text',array(
-			'label' => Mage::helper('loan')->__('Last Name'),
-			'class' => 'required-entry',
+		$form->addField('amount','text',array(
+			'label' => Mage::helper('loan')->__('Amount'),
+			'class' => 'required-entry validate-number',
 			'required' => true,
-			'name' => 'last_name'
+			'name' => 'amount'
 		));
 
-		$form->addField('loan_value','text',array(
-			'label' => Mage::helper('loan')->__('Loan Value'),
+		$form->addField('duration','text',array(
+			'label' => Mage::helper('loan')->__('Duration'),
 			'class' => 'required-entry',
 			'required' => true,
-			'name' => 'loan_value'
+			'name' => 'duration'
+		));
+
+		$form->addField('interest','text',array(
+			'label' => Mage::helper('loan')->__('Interest'),
+			'class' => 'required-entry validate-number',
+			'required' => true,
+			'name' => 'interest'
+		));
+
+		$reasonCat = Mage::getModel('loan/reason')->getCollection();
+		$reasonFiltered = array();
+		
+
+		foreach ($reasonCat as $key => $reason) {
+			if( $reason->parent_id)
+				$reasonFiltered[$key] = $reasonCat->getItems()[$reason->parent_id]->cat_name . ' | '. $reason->cat_name;
+		}
+
+
+
+		$form->addField('reason_cat_id','select',array(
+			'label' => Mage::helper('loan')->__('Reason'),
+			'class' => 'required-entry',
+			'required' => true,
+			'name' => 'reason_cat_id',
+			'values' => $reasonFiltered
+		));
+
+		$form->addField('reason_details','textarea',array(
+			'label' => Mage::helper('loan')->__('Reason Details'),
+			//'class' => 'required-entry',
+			
+			'name' => 'reason_details'
 		));
 
 		$form->addField('status','select',array(

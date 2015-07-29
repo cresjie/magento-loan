@@ -7,22 +7,22 @@ class S900_Loan_Block_Adminhtml_Loan_Edit extends Mage_Adminhtml_Block_Widget_Fo
 		
 		$this->_objectId = 'loan_id';
 		$this->_blockGroup = 'loan';
-                $this->_controller = 'adminhtml_loan';
+        $this->_controller = 'adminhtml_loan';
 
-                parent::__construct();
+        parent::__construct();
 
-                $this->_updateButton('save','label', Mage::helper('loan')->__('Save Loan') );
-                $this->_updateButton('delete','label', Mage::helper('loan')->__('Delete Loan') );
-                
-                $this->_addButton(
-                	'save_and_edit_button',
-                	array(
-                		'label' => Mage::helper('loan')->__('Save and Continue Edit'),
-                		'onclick' => "editForm.submit( '{$this->getUrl('*/*/save',array('back' => true,'loan_id' => $this->getRequest()->getParam('loan_id')))}' )",
-                		'class' => 'save'
-                	),
-                	100
-                );
+        $this->_updateButton('save','label', Mage::helper('loan')->__('Save Loan') );
+        $this->_updateButton('delete','label', Mage::helper('loan')->__('Delete Loan') );
+        
+        $this->_addButton(
+        	'save_and_edit_button',
+        	array(
+        		'label' => Mage::helper('loan')->__('Save and Continue Edit'),
+        		'onclick' => "editForm.submit( '{$this->getUrl('*/*/save',array('back' => true,'loan_id' => $this->getRequest()->getParam('loan_id')))}' )",
+        		'class' => 'save'
+        	),
+        	100
+        );
 
                 
         

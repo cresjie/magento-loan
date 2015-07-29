@@ -1,0 +1,47 @@
+<layout>
+	
+
+	<adminhtml_loan_config_index>
+
+		<reference name="head">
+			<action method="addCss"><name>css/s900/loan/config.css</name></action>
+
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular-filter.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/s900/loan/config.js</script></action>
+		</reference>
+
+		
+
+		<reference name="left">
+			<block type="core/template" name="config.left" as="config.left" template="s900/loan/config/left.phtml"/>
+			
+		</reference>
+		<reference name="content">
+			<block type="adminhtml/template" name="config.content" as="config.content" template="s900/loan/config/content.phtml"/>
+		</reference>
+		
+
+	</adminhtml_loan_config_index>
+
+	<adminhtml_loan_account_edit>
+
+		<reference name="head">
+			
+			<action method="addExternalItem" name="google.map"><type>external_js</type><name>https://maps.googleapis.com/maps/api/js?libraries=places</name><params/></action>
+			
+		</reference>
+		
+		
+		<reference name="left">
+			<block type="adminhtml/template" name="account.edit.left" as="account.edit.left" template="s900/loan/account/left.phtml"/>
+		</reference>
+
+		<reference name="content">
+			<block type="loan/adminhtml_loan_account_edit" name="account.edit.content" as="account.edit.content" template="s900/loan/account/content.phtml"/>
+			
+		</reference>
+		
+	</adminhtml_loan_account_edit>
+
+</layout>

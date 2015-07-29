@@ -1,0 +1,87 @@
+<div ng-controller="ConfigController">
+	<div class="content-header">
+	    <table cellspacing="0">
+	        <tbody><tr>
+	            <td>
+	                <h3>Configuration</h3>
+	            </td>
+	            <td class="form-buttons"><button title="Save Config" type="button" class="scalable save" ng-click="SaveConfig()"><span><span><span>Save Config</span></span></span></button></td>
+	         </tr>
+	    </tbody></table>
+	</div>
+	<form id="config_form" action="<?=$this->getUrl('*/*/save')?>" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="amount_options" name="amount_options">
+		<input type="hidden" id="duration_options" name="duration_options">
+		<input type="hidden" id="form_key" name="form_key" value="<?=Mage::getSingleton('core/session')->getFormKey()?>">
+		<div class="entry-edit">
+			<div class="entry-edit-head">
+			    <h4 class="icon-head head-edit-form fieldset-legend">Loan Amount Options</h4>
+			    <div class="form-buttons"></div>
+			</div>
+			<div class="box">
+				<table cellspacing="0" class="dynamic-grid">
+					<tbody>
+						<tr>
+							<th>Minimum</th>
+							<th>Maximum</th>
+							<th>Offset</th>
+						</tr>
+						<tr>
+							<td><input type="text" id="minimum" class="text-input required-entry validate-digits" ng-model="loanAmount.minimum"></td>
+							<td><input type="text" id="maximum" class="text-input required-entry validate-digits" ng-model="loanAmount.maximum"></td>
+							<td><input type="text" id="offset" class="text-input required-entry validate-digits" ng-model="loanAmount.offset" /></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div> <!-- /.entry-edit-->
+
+		<div class="entry-edit">
+			<div class="entry-edit-head">
+			    <h4 class="icon-head head-edit-form fieldset-legend">Loan Duration Options</h4>
+			    <div class="form-buttons"></div>
+			</div>
+			<div class="box">
+				<table class="dynamic-grid">
+					<thead>
+						<tr>
+							<th>Duration Length</th>
+							<th>Duration Unit</th>
+							<th>Interest (%)</th>
+							<th><button type="button" class="add" ng-click="AddDuration()"><span></span>Add Duration Option</button></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="duration in durations">
+							<td><input type="text" id="duration_length[{{$index}}]" class="required-entry validate-digits" placeholder="Number" ng-model="duration.duration_length"></td>
+							<td>
+								<select id="duration_unit[{{$index}}]" class="select required-entry" ng-model="duration.duration_unit">
+									<option value="weeks" ng-selected="true">weeks</option>
+									<option value="monts">months</option>
+									<option value="year(s)">year(s)</option>
+								</select>
+							</td>
+							<td><input type="text" id="duration.interest[{{$index}}]" class="required-entry validate-number" placeholder="Percent" ng-model="duration.interest"></td>
+							<td><button class="delete" type="button" ng-click="DeleteDuration($index)"><span></span>Delete</button></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div> <!-- /.entry-edit-->
+		
+	</form>
+</div>
+
+<script>
+	var GET_CONFIG_URL = "<?=$this->getUrl('*/*/get')?>";
+	var REASON_URL = {
+		get: "<?=$this->getUrl('*/loan_reason/get')?>",
+		create: "<?=$this->getUrl('*/loan_reason/create')?>",
+		edit: "<?=$this->getUrl('*/loan_reason/edit')?>",
+		delete: "<?=$this->getUrl('*/loan_reason/delete')?>"
+	};
+
+</script>
