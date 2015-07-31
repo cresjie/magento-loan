@@ -56,9 +56,9 @@
 						<tr ng-repeat="duration in durations">
 							<td><input type="text" id="duration_length[{{$index}}]" class="required-entry validate-digits" placeholder="Number" ng-model="duration.duration_length"></td>
 							<td>
-								<select id="duration_unit[{{$index}}]" class="select required-entry" ng-model="duration.duration_unit">
-									<option value="weeks" ng-selected="true">weeks</option>
-									<option value="monts">months</option>
+								<select id="duration_unit[{{$index}}]" class="select required-entry" ng-model="duration.duration_unit" ng-init="duration.duration_unit = duration.duration_unit || 'weeks' ">
+									<option value="weeks">weeks</option>
+									<option value="month(s)">month(s)</option>
 									<option value="year(s)">year(s)</option>
 								</select>
 							</td>
@@ -69,6 +69,8 @@
 
 					</tbody>
 				</table>
+
+				<button ng-click="check()" type="button">Check</button>
 			</div>
 		</div> <!-- /.entry-edit-->
 		

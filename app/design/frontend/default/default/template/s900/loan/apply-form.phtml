@@ -1,42 +1,73 @@
 <div class="loan-apply-container">
-
-	<form class="loan-apply-form" id="loan_apply_form" method="post" action="<?=$this->getActionUrl()?>">
-		<fieldset>
-			<h4>Apply for loan</h4>
-
-			<div class="input-box">
-				<label for="email">Email:</label>
-				<input type="email" name="email"class="required input-text">
+	
+	<div class="wrapper-loan" ng-controller="LoanAmountController">
+		<div class="step-1" ng-class="{hide: currentStep != 1}">
+			<h3 class="text-center">How much do you like ?</h3>
+			
+			<div class="row pad-10">
+				<div class="col-xs-1  pad-10">$<?=json_decode($this->getAmountOptions(),true)['minimum'] ?></div>
+				<div class="col-xs-10  pad-10">
+					<div id="amount_slider">
+						<span class="ui-slider-handle"><span id="amount_container"></span></span>
+					</div>
+				</div>
+				<div class="col-xs-1  pad-10">$<?=json_decode($this->getAmountOptions(),true)['maximum'] ?></div>
 			</div>
 
-			<div class="input-box">
-				<label for="first_name">First Name:</label>
-				<input type="text" name="first_name" class="required input-text">
+			<h3 class="text-center">How would you like to pay?</h3>
+			<table class="table-duration-options">
+				<thead>
+					<tr>
+						<td></td>
+						<td>Av. Weekly Repayments</td>
+						<td>Est. Charges & Fees</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr ng-repeat="_duration in durationOptions" ng-disabled="getWeeklyPayment(_duration) < 10" ng-class="{selected: loan.duration == _duration.duration_length + ' ' + _duration.duration_unit}" ng-click="setDuration(_duration)">
+						<td>{{_duration.duration_length}} {{_duration.duration_unit}}</td>
+						<td class="text-center">{{getWeeklyPayment(_duration)}}</td>
+						<td class="text-center">{{getFee(_duration)}}</td>
+						<td> <div class="check-box"></div></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="pad-10">
+				<button class="btn btn-primary pull-right" ng-click="nextStep()">Next</button>
+			</div>
+		</div>
+
+		<div class="step-2" ng-class="{hide: currentStep != 2}">
+			<h3 class="text-center title">Have you applied for a Cashies loan online before?</h3>
+
+			<div class="row pad-10">
+				<div class="col-xs-1">
+					<button class="btn btn-primary full-w" ng-click="submit('<?=$this->getUrl('*/application/repeat_customer')?>')">YES</button>
+				</div>
+				<div class="col-xs-10">
+					<p class="pad-10">Great, we can fast track your application.</p>
+				</div>
 			</div>
 
-			<div class="input-box">
-				<label for="last_name">Last Name:</label>
-				<input type="text" name="last_name" class="required input-text">
+			<div class="row pad-10">
+				<div class="col-xs-1">
+					<button class="btn btn-primary full-w" ng-click="submit('<?=$this->getUrl('*/application')?>')">NO</button>
+				</div>
+				<div class="col-xs-10">
+					<p class="pad-10">No problem, it will take less than 5 minutes to apply.</p>
+				</div>
 			</div>
+			
+		</div>
+		
 
-			<div class="input-box">
-				<label for="loan_value">Loan Value:</label>
-				<input type="text" name="loan_value" class="required">
-			</div>
-
-			 <div class="button-set">
-		        <p class="required">* Required Fields</p>
-		        <button class="form-button" type="submit"><span>Submit</span></button>
-		 
-		    </div>
-		</fieldset>
-	</form>
-
-	<div id="amount_slider">
-		<span class="ui-slider-handle"><span id="amount_container"></span></span>
 	</div>
 </div>
 <script>
 	var amountOptions = <?=$this->getAmountOptions()?>;
 	var durationOptions = <?=$this->getDurationOptions()?>;
+
 </script>

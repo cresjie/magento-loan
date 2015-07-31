@@ -4,14 +4,12 @@
     	<button id="id_8849c892e72a7108f3985b0a56c788a8" title="Back" type="button" class="scalable back" onclick="setLocation('<?=$this->getBackUrl()?>')" style=""><span><span><span>Back</span></span></span></button>
     	
     	<button id="id_3244562c7de5d57f4e8b25a54cc88e61" title="Reset" type="button" class="scalable " onclick="setLocation(window.location.href)" style=""><span><span><span>Reset</span></span></span></button>
-
-    	<button id="id_51e5a3fff6f1b5b0da9e2a153f578df9" title="Create Order" type="button" class="scalable add" onclick="setLocation('http://svr/~cres/magento/index.php/admin/sales_order_create/start/customer_id/1/key/8e0eb7ffc0f917ab7fb506a3d5b6b29e/')" style=""><span><span><span>Create Order</span></span></span></button>
     	
     	<button id="id_34f197251935721efc58a6c33f6461c3" title="Delete Customer" type="button" class="scalable delete" onclick="deleteConfirm('Are you sure you want to do this? Account History will also be deleted.', '<?=$this->getUrl('*/*/delete',array('id' => $this->getAccount()->id))?>')" style=""><span><span><span>Delete Customer</span></span></span></button>
 
     	<button id="id_362f7f2f26ae3c013982998198b122c8" title="Save Customer" type="button" class="scalable save" onclick="formSubmit()" style=""><span><span><span>Save Customer</span></span></span></button>
 
-    	<button id="id_b7e050f9ba2add8584f650beaab77e21" title="Save and Continue Edit" type="button" class="scalable save" onclick="saveAndContinueEdit('http://svr/~cres/magento/index.php/admin/customer/save/back/edit/tab/{{tab_id}}/id/1/key/6a3bbf066caa30b22826279d962c4d13/')" style=""><span><span><span>Save and Continue Edit</span></span></span></button>
+    	
     </p>
 </div>
 
@@ -101,7 +99,16 @@
 										</div>
 										<input type="hidden" name="address_info" id="address_info" value='<?=$this->getAccount()->address_info?>'>
 										<div id="google_map" style="height: 380px;"></div>
-										<script src="<?=$this->getSkinUrl('js/s900/loan/account/edit.js')?>"></script>
+										
+										<script src="<?=$this->getSkinUrl('js/s900/loan/account/google-map-setup.js')?>"></script>
+										<script>
+											var editForm = new varienForm('edit_form');
+
+											function formSubmit(){
+												if(editForm.submit())
+													$('loading-mask').show()
+											}
+										</script>
 									</td>
 								</tr>
 

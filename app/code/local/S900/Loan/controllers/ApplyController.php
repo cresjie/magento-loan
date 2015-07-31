@@ -7,19 +7,11 @@ class S900_Loan_ApplyController extends Mage_Core_Controller_Front_Action{
 		
 		$this->loadLayout();
 
-		
-
-		//$block = $this->getLayout()->createBlock('loan/applyloan')->setTemplate('s900/loan/apply-form.phtml');
-		//$this->getLayout()->getBlock('content')->append( $block );
-
 		$this->renderLayout();
-
-
-
-		
-		
+	
 	}
 
+	
 
 
 	public function submitAction(){

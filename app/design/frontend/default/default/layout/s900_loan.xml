@@ -1,7 +1,10 @@
 <layout>
 	
 	<loan_apply_index>
-
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+		</reference>
+		
 		<reference name="head">
 			<action method="addCss"><name>css/s900/loan/jquery-ui.min.css</name></action>
 			<action method="addCss"><name>css/s900/loan/apply.css</name></action>
@@ -9,6 +12,7 @@
 			<action method="addItem"><type>js</type><script>lib/jquery/jquery-1.10.2.min.js</script></action>
 			<action method="addItem"><type>js</type><script>lib/jquery/noconflict.js</script></action>
 			<action method="addItem"><type>js</type><script>lib/jquery/ui/jquery-ui.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular.min.js</script></action>
 			<action method="addItem"><type>skin_js</type><script>js/s900/loan/apply.js</script></action>
 		</reference>
 
@@ -18,4 +22,52 @@
 		</reference>
 	</loan_apply_index>
 
+	<loan_application_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+		</reference>
+
+		<reference name="head">
+
+			<action method="addItem"><type>js_css</type><script>calendar/calendar-win2k-1.css</script></action>
+
+			<action method="addCss"><name>css/s900/loan/apply.css</name></action>
+
+			<action method="addItem"><type>js</type><script>mage/adminhtml/form.js</script></action>
+
+			<action method="addItem"><type>js</type><script>calendar/calendar.js</script></action>
+			<action method="addItem"><type>js</type><script>calendar/calendar-setup.js</script></action>
+
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular-filter.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/s900/loan/application.js</script></action>
+
+			<block type="core/html_calendar" name="head.calendar" as="calendar" template="page/js/calendar.phtml"/>
+		</reference>
+
+		<reference name="content">
+			<block type="loan/applicationloan" name="loan.application.content" template="s900/loan/application.phtml"/>
+		</reference>
+	</loan_application_index>
+
+	<loan_application_repeat_customer>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+		</reference>
+
+		<reference name="head">
+			<action method="addCss"><name>css/s900/loan/apply.css</name></action>
+
+			<action method="addItem"><type>js</type><script>mage/adminhtml/form.js</script></action>
+
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/angular/angular-filter.min.js</script></action>
+			<action method="addItem"><type>skin_js</type><script>js/s900/loan/repeat-customer.js</script></action>
+
+		</reference>
+
+		<reference name="content">
+			<block type="loan/applicationloan" name="loan.application.content" template="s900/loan/repeat-customer.phtml"/>
+		</reference>
+	</loan_application_repeat_customer>
 </layout>

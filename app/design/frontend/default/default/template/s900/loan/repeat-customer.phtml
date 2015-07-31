@@ -1,0 +1,101 @@
+<div class="wrapper-loan">	
+	<div ng-controller="LoanApplicationController" class="loan-application">
+		<form id="loan_form" action="<?=$this->getUrl('*/ajax/add_loan')?>" method="post">
+			<input type="hidden" value="<?=$this->getFormkey()?>">
+			<h3 class="title">Loan Details</h3>
+
+			<div class="row pad-10">
+				<div class="col-md-3 col">
+					<label>Loan Amount</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					<select class="input select required-entry validate-digits" name="amount" ng-model="loan.amount" ng-init="loan.amount = '<?=$_GET['amount']?>' ">
+						<option value>Please Select ...</option>
+						<?php 
+							$amountOptions = json_decode($this->getAmountOptions(),true);
+							for($amount = $amountOptions['minimum']; $amount <= $amountOptions['maximum']; $amount+= $amountOptions['offset']): ?>
+							<option value="<?=$amount?>">$<?=$amount?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 col">
+					<label>Loan Duration</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					
+					<select class="input select required-entry" name="duration" ng-model="selectedDuration" ng-options="duration as (duration.duration_length + ' ' + duration.duration_unit ) for duration in durationOptions" ng-change="setDurationInterest()" ng-init="selectedDuration = durationOptions[<?=$_GET['i_duration']?>];setDurationInterest()">
+						<option value>Please Select ...</option>
+					</select>
+					
+					
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Reason for Loan</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<select ng-model="mainCatId" class="input select required-entry">
+						<option value>Please Select ...</option>
+						<option ng-repeat="mainCat in reasonCategory | where: {parent_id:0} | orderBy: 'cat_name'" value="{{mainCat.cat_id}}">{{mainCat.cat_name}}</option>
+					</select>
+					
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					
+					<select  class="input select required-entry" name="reason_cat_id" ng-model="selectedSubCat" ng-options="reason as reason.cat_name for reason in reasonCategory | where:{parent_id:mainCatId} | orderBy: 'cat_name'" ng-change="loan.reason_cat_id = selectedSubCat.cat_id">
+						<option value>Please Select ...</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Reason Details</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					<textarea class="input input-text required-entry" name="reason_details" ng-model="loan.reason_details"></textarea>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+	<div ng-controller="AccountInfoController">
+		<h3 class="title">Account Credentials</h3>
+		<form id="account_info" method="post" action="<?=$this->getUrl('*/ajax/get_account')?>">
+
+			<div class="row pad-10">
+				<div class="col-md-3">
+					<label>Email</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text validate-email required-entry" id="email" name="email" ng-model="account.email" placeholder="Email">
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Mobile Phone</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text required-entry" id="mobile" name="mobile_phone" ng-model="account.mobile_phone" placeholder="Mobile">
+				</div>
+			</div>
+
+		</form>
+		
+		<button type="button" class="btn btn-primary btn-lg pull-right" ng-click="save()">Save</button>
+	</div>
+</div>
+
+<script>
+	var reasonCategory = <?=json_encode($this->getReasonCategory()->toArray()['items'],true )?>;
+	var amountOptions = <?=$this->getAmountOptions()?>;
+	var durationOptions = <?=$this->getDurationOptions()?>;
+</script>

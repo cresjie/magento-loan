@@ -1,0 +1,178 @@
+<div class="wrapper-loan">	
+	<div ng-controller="LoanApplicationController" class="loan-application">
+		<form id="loan_form" action="<?=$this->getUrl('*/ajax/add_loan')?>" method="post">
+			<input type="hidden" value="<?=$this->getFormkey()?>">
+			<h3 class="title">Loan Details</h3>
+
+			<div class="row pad-10">
+				<div class="col-md-3 col">
+					<label>Loan Amount</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					<select class="input select required-entry validate-digits" name="amount" ng-model="loan.amount" ng-init="loan.amount = '<?=$_GET['amount']?>' ">
+						<option value>Please Select ...</option>
+						<?php 
+							$amountOptions = json_decode($this->getAmountOptions(),true);
+							for($amount = $amountOptions['minimum']; $amount <= $amountOptions['maximum']; $amount+= $amountOptions['offset']): ?>
+							<option value="<?=$amount?>">$<?=$amount?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 col">
+					<label>Loan Duration</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					
+					<select class="input select required-entry" name="duration" ng-model="selectedDuration" ng-options="duration as (duration.duration_length + ' ' + duration.duration_unit ) for duration in durationOptions" ng-change="setDurationInterest()" ng-init="selectedDuration = durationOptions[<?=$_GET['i_duration']?>];setDurationInterest()">
+						<option value>Please Select ...</option>
+					</select>
+					
+					
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Reason for Loan</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<select ng-model="mainCatId" class="input select required-entry">
+						<option value>Please Select ...</option>
+						<option ng-repeat="mainCat in reasonCategory | where: {parent_id:0} | orderBy: 'cat_name'" value="{{mainCat.cat_id}}">{{mainCat.cat_name}}</option>
+					</select>
+					
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					
+					<select  class="input select required-entry" name="reason_cat_id" ng-model="selectedSubCat" ng-options="reason as reason.cat_name for reason in reasonCategory | where:{parent_id:mainCatId} | orderBy: 'cat_name'" ng-change="loan.reason_cat_id = selectedSubCat.cat_id">
+						<option value>Please Select ...</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Reason Details</label>
+				</div>
+				<div class="col-md-3 col pad-lr-5">
+					<textarea class="input input-text required-entry" name="reason_details" ng-model="loan.reason_details"></textarea>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+	<div ng-controller="PersonalDetailsController">
+		<form id="personal_form" method="post" action="<?=$this->getUrl('*/ajax/add_account')?>">
+			<h3 class="title">Personal Details</h3>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Title</label>
+				</div>
+				<div class="col-md-3  pad-lr-5">
+					<select ng-model="account.title" class="input required-entry select" name="title">
+						<option value>Please Select</option>
+						<option value="Mr">Mr</option>
+						<option value="Mrs">Mrs</option>
+						<option value="Miss">Miss</option>
+						<option value="Ms">Ms</option>
+					</select>
+
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Name</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text required-entry" name="first_name" ng-model="account.first_name" placeholder="First Name">
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text" name="middle_name" ng-model="account.middle_name" placeholder="Middle Name">
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text required-entry" name="last_name" ng-model="account.last_name" placeholder="Last Name">
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3">
+					<label>Email</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text validate-email required-entry" id="email" name="email" ng-model="account.email" placeholder="Email">
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Date of birth</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					
+					<input type="text" id="birthday" name="birthday" class="input input-text required-entry validate-date" ng-model="account.birthday" placeholder="mm/dd/YYYY">
+				</div>
+				<div class="col-md-1 pad-10">
+					<img src="<?=$this->getSkinUrl('images/s900/loan/grid-cal.gif')?>" alt="" class="v-middle" id="birthday_trig" title="Select Date">
+					<script>
+
+							 Calendar.setup({
+						                    inputField: "birthday",
+						                    ifFormat: "%m/%e/%Y",
+						                    showsTime: false,
+						                    button: "birthday_trig",
+						                    align: "Bl",
+						                    singleClick : true
+						                });
+											
+					</script>
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Mobile Phone</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" class="input input-text required-entry" id="mobile" name="mobile_phone" ng-model="account.mobile_phone" placeholder="Mobile">
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-3 ">
+					<label>Address</label>
+				</div>
+				<div class="col-md-3 pad-lr-5">
+					<input type="text" id="address" name="address" class="input input-text required-entry" ng-model="account.address" placeholder="Enter Address">
+					<input type="text" id="address_info" name="address_info" ng-model="account.address_info" style="display:none">
+				</div>
+			</div>
+
+			<div class="row pad-10">
+				<div class="col-md-offset-3">
+					<div id="google_map" style="height:300px"></div>
+				</div>
+			</div>
+
+			
+
+			
+		</form>
+		<button type="button" class="btn btn-primary btn-lg pull-right" ng-click="save()">Save</button>
+	</div>
+</div>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="<?=$this->getSkinUrl('js/s900/loan/google-map-setup.js')?>"></script>
+<script>
+	var reasonCategory = <?=json_encode($this->getReasonCategory()->toArray()['items'],true )?>;
+	var amountOptions = <?=$this->getAmountOptions()?>;
+	var durationOptions = <?=$this->getDurationOptions()?>;
+</script>

@@ -7,12 +7,12 @@
 			<sort_order>30</sort_order>
 
 			<children>
-				<index>
+				<!--<index>
 					<title>Index</title>
 					<sort_order>1</sort_order>
 					<action>adminhtml/loan</action>
 				</index>
-
+				-->
 				<manage_loan>
 					<title>Manage Loans</title>
 					<sort_order>1</sort_order>
