@@ -1,11 +1,8 @@
 <?php
-
 $installer = $this;
 $installer->startSetup();
 
 $installer->run("
-
-	DROP TABLE IF EXISTS {$this->getTable('loan/account')};
 
 	CREATE TABLE {$this->getTable('loan/account')} (
 		`id` int(10) UNSIGNED NOT NULL,
@@ -22,16 +19,12 @@ $installer->run("
 		PRIMARY KEY (`id`)
 	)ENGINE=InnoDB Default Charset=utf8;
 
-	DROP TABLE IF EXISTS {$this->getTable('loan/income')};
-
 	CREATE TABLE {$this->getTable('loan/income')} (
 		`income_id` int(10) UNSIGNED NOT NULL,
 		`account_id` int(10) UNSIGNED NOT NULL,
 		`income_details` text NOT NULL,
 		PRIMARY KEY (`income_id`)
 	)ENGINE=InnoDB Default Charset=utf8;
-
-	DROP TABLE IF EXISTS {$this->getTable('loan/loan')};
 
 	CREATE TABLE {$this->getTable('loan/loan')} (
 		`loan_id` int(10) UNSIGNED NOT NULL,
@@ -46,8 +39,6 @@ $installer->run("
 		`loan_updated_at` DATETIME
 		PRIMARY KEY (`loan_id`)
 	)ENGINE=InnoDB Default Charset=utf8;
-	
-	DROP TABLE IF EXISTS {$this->getTable('loan/reason')};
 
 	CREATE TABLE {$this->getTable('loan/reason')} (
 		`cat_id` INT(10) UNSIGNED NOT NULL,
@@ -55,8 +46,6 @@ $installer->run("
 		`cat_name` varchar(255) NOT NULL,
 		PRIMARY KEY (`cat_id`)
 	)ENGINE=InnoDB Default Charset=utf8;
-
-	DROP TABLE IF EXISTS {$this->getTable('loan/status_attr')};
 
 	CREATE TABLE {$this->getTable('loan/status_attr')} (
 		`status_code` int(3) NOT NULL,

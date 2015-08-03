@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
-
+<!-- 
+	Name: Loan
+	Author: Cres Jie Labasano
+	Email: cresjie@gmail.com
+	Github: https://github.com/cresjie/magento-loan
+-->
 <config>
 	<modules>
 		<S900_Loan>
