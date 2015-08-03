@@ -218,11 +218,6 @@
    			
    			
    		}
-
-   		$scope.check = function(){
-   			console.log($scope);
-   		}
-
    		
    		
    		ConfigFactory.getConfig().success(function(data){
